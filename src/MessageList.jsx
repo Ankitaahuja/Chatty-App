@@ -6,7 +6,7 @@ class MessageList extends Component {
     return (
       <main className="messages">
         {this.props.messages.map(message => {
-          return <Message message={message} key={message.id} />;
+          return <Message message={message} key={message.id} />; //sending message objects and key(id) to Message.jsx
         })}
         <div className="message system">
           Anonymous1 changed their name to nomnom.
