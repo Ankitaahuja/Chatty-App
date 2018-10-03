@@ -8,30 +8,33 @@ class App extends Component {
     super(props);
     // this is the *only* time you should assign directly to state:
     this.state = {
-      currentUser: { name: 'Bob' }, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          id: 1,
-          username: 'Bob',
-          content: 'Has anyone seen my marbles?'
-        },
-        {
-          id: 2,
-          username: 'Anonymous',
-          content:
-            'No, I think you lost them. You lost your marbles Bob. You lost them for good.'
-        }
-      ]
+      id: [],
+      currentUser: { username: 'Ankita' },
+      messages: [] //messgaes coming from the server will be stored here
     };
   }
 
+  addMessage = content => {
+    const message = {
+      //making an message Object
+      username: this.state.currentUser.username,
+      content: content
+    };
+
+    this.socket.send(JSON.stringify(message));
+  };
   componentDidMount = () => {
     console.log('componentDidMount <App />');
     this.socket = new WebSocket('ws://localhost:3001');
     this.socket.onopen = event => {
       console.log('connected with server');
     };
-
+    this.socket.onmessage = event => {
+      let message = JSON.parse(event.data);
+      console.log(message);
+      const messages = this.state.messages.concat(message);
+      this.setState({ messages: messages });
+    };
     // _handleInput = ev => this.socket.send(this.state.messages);
 
     setTimeout(() => {
@@ -49,25 +52,13 @@ class App extends Component {
     }, 3000);
   };
 
-  addMessage = content => {
-    const message = {
-      //making an message Object
-      id: this.state.messages.length + 5, // as 3 ids are already formed, 5 is added to be safe
-      username: this.state.currentUser.name,
-      content: content
-    };
-    const messages = this.state.messages.concat(message);
-    this.setState({ messages: messages });
-    this.socket.send(JSON.stringify(message));
-  };
-
   render() {
     return (
       <div>
         <NavBar />
         <MessageList messages={this.state.messages} />
         <ChatBar
-          currentUser={this.state.currentUser}
+          currentUser={this.state.currentUser.name}
           addMessage={this.addMessage}
         />
       </div>

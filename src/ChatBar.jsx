@@ -4,7 +4,7 @@ class ChatBar extends Component {
   handleKeyPress = event => {
     if (event.key == 'Enter' || event.keyCode == 13) {
       console.log('enter press here! ');
-      this.props.addMessage(event.target.value); // this is the content (Message Text)??
+      this.props.addMessage(event.target.value);
       event.target.value = '';
     }
   };
@@ -14,8 +14,10 @@ class ChatBar extends Component {
       <footer className="chatbar">
         <input
           className="chatbar-username"
+          id="chatbar-username"
           placeholder="Your Name (Optional)"
-          defaultValue={this.props.currentUser.name}
+          defaultValue={this.props.currentUser}
+          // onKeyPress={this.handleNameKeyPress}
         />
         <input
           className="chatbar-message"
