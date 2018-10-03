@@ -27,6 +27,13 @@ class App extends Component {
 
   componentDidMount = () => {
     console.log('componentDidMount <App />');
+    this.socket = new WebSocket('ws://localhost:3001');
+    this.socket.onopen = event => {
+      console.log('connected with server');
+    };
+
+    // _handleInput = ev => this.socket.send(this.state.messages);
+
     setTimeout(() => {
       console.log('Simulating incoming message');
       // Add a new message to the list of messages in the data store
@@ -51,6 +58,7 @@ class App extends Component {
     };
     const messages = this.state.messages.concat(message);
     this.setState({ messages: messages });
+    this.socket.send(JSON.stringify(message));
   };
 
   render() {
