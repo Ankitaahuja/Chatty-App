@@ -9,7 +9,7 @@ class MessageList extends Component {
           return <Message message={message} key={message.id} />; //sending message objects and key(id) to Message.jsx
         })}
         <div className="message system">
-          <span class="notification-content">
+          <span className="notification-content">
             Anonymous1 changed their name to nomnom.
           </span>
         </div>

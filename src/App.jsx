@@ -16,7 +16,6 @@ class App extends Component {
 
   addMessage = content => {
     const message = {
-      //making an message Object
       username: content.username,
       content: content.content
     };
@@ -26,29 +25,15 @@ class App extends Component {
   componentDidMount = () => {
     console.log('componentDidMount <App />');
     this.socket = new WebSocket('ws://localhost:3001');
-
     this.socket.onopen = event => {
       console.log('connected with server');
     };
 
     this.socket.onmessage = event => {
       let message = JSON.parse(event.data);
-      switch (data.type) {
-        case 'incomingMessage':
-          console.log(message);
-          const messages = this.state.messages.concat(message);
-          this.setState({ messages: messages });
-
-          break;
-        case 'incomingNotification':
-          const username = this.state.us.concat(message);
-          this.setState({ messages: messages });
-          // handle incoming notification
-          break;
-        default:
-          // show an error in the console if the message type is unknown
-          throw new Error('Unknown event type ' + data.type);
-      }
+      console.log(message);
+      const messages = this.state.messages.concat(message);
+      this.setState({ messages: messages });
     };
 
     setTimeout(() => {
