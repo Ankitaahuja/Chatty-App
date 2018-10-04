@@ -10,7 +10,7 @@ body {
 }
 
 .chatbar {
-  background: tomato;
+  background: #a7a5de;
   border-top: 1px solid black;
   bottom: 0;
   display: flex;
@@ -65,7 +65,7 @@ body {
 }
 
 .navbar {
-  background: tomato;
+  background: #a7a5de;
   border-bottom: 1px solid black;
   height: 60px;
   left: 0;
@@ -73,6 +73,11 @@ body {
   position: fixed;
   right: 0;
   top: 0;
+
+}
+
+.user-count {
+  float: right;
 }
 
 .navbar-brand {

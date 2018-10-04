@@ -8,6 +8,7 @@ class App extends Component {
     super(props);
     // this is the *only* time you should assign directly to state:
     this.state = {
+      userCount: 0,
       id: [],
       currentUser: { username: 'Ankita' },
       messages: [] //messgaes coming from the server will be stored here
@@ -42,42 +43,27 @@ class App extends Component {
 
     this.socket.onmessage = event => {
       let message = JSON.parse(event.data);
-      // console.log(message);
-
       switch (message.type) {
         case 'incomingMessage':
           this.setState({ messages: [...this.state.messages, message] });
           // handle incoming message
           break;
         case 'incomingNotification':
-          this.setState({ messages: [...this.state.messages, message] }); //
+          this.setState({ messages: [...this.state.messages, message] });
           break;
+        case 'userCountUpdate':
+          this.setState({ userCount: message.userCount });
         default:
           // show an error in the console if the message type is unknown
           throw new Error('Unknown event type ' + message.type);
       }
     };
-
-    // setTimeout(() => {
-    //   console.log('Simulating incoming message');
-    //   // Add a new message to the list of messages in the data store
-    //   const newMessage = {
-    //     id: 3,
-    //     username: 'Michelle',
-    //     content: 'Hello there!'
-    //   };
-
-    //   const messages = this.state.messages.concat(newMessage);
-    //   // Update the state of the app component.
-    //   // Calling setState will trigger a call to render() in App and all child components.
-    //   this.setState({ messages: messages });
-    // }, 3000);
   };
 
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar userCount={this.state.userCount} />
         <MessageList messages={this.state.messages} />
         <ChatBar
           currentUser={this.state.currentUser.username}
