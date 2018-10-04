@@ -16,11 +16,22 @@ class App extends Component {
 
   addMessage = content => {
     const message = {
-      username: content.username,
-      content: content.content
+      type: 'postMessage',
+      username: this.state.currentUser.username,
+      content: content
     };
-
     this.socket.send(JSON.stringify(message));
+  };
+
+  addNotification = username => {
+    const notification = {
+      type: 'postNotification',
+      content: `${
+        this.state.currentUser.username
+      } has changed their name to ${username}`
+    };
+    this.socket.send(JSON.stringify(notification));
+    this.setState({ currentUser: { username } });
   };
   componentDidMount = () => {
     console.log('componentDidMount <App />');
@@ -31,24 +42,36 @@ class App extends Component {
 
     this.socket.onmessage = event => {
       let message = JSON.parse(event.data);
-      console.log(message);
-      const messages = this.state.messages.concat(message);
-      this.setState({ messages: messages });
+      // console.log(message);
+
+      switch (message.type) {
+        case 'incomingMessage':
+          this.setState({ messages: [...this.state.messages, message] });
+          // handle incoming message
+          break;
+        case 'incomingNotification':
+          this.setState({ messages: [...this.state.messages, message] }); //
+          break;
+        default:
+          // show an error in the console if the message type is unknown
+          throw new Error('Unknown event type ' + message.type);
+      }
     };
 
-    setTimeout(() => {
-      console.log('Simulating incoming message');
-      // Add a new message to the list of messages in the data store
-      const newMessage = {
-        id: 3,
-        username: 'Michelle',
-        content: 'Hello there!'
-      };
-      const messages = this.state.messages.concat(newMessage);
-      // Update the state of the app component.
-      // Calling setState will trigger a call to render() in App and all child components.
-      this.setState({ messages: messages });
-    }, 3000);
+    // setTimeout(() => {
+    //   console.log('Simulating incoming message');
+    //   // Add a new message to the list of messages in the data store
+    //   const newMessage = {
+    //     id: 3,
+    //     username: 'Michelle',
+    //     content: 'Hello there!'
+    //   };
+
+    //   const messages = this.state.messages.concat(newMessage);
+    //   // Update the state of the app component.
+    //   // Calling setState will trigger a call to render() in App and all child components.
+    //   this.setState({ messages: messages });
+    // }, 3000);
   };
 
   render() {
@@ -57,8 +80,9 @@ class App extends Component {
         <NavBar />
         <MessageList messages={this.state.messages} />
         <ChatBar
-          currentUser={this.state.currentUser.name}
+          currentUser={this.state.currentUser.username}
           addMessage={this.addMessage}
+          addNotification={this.addNotification}
         />
       </div>
     );
