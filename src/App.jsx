@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 import NavBar from './NavBar.jsx';
+import Favicon from 'react-favicon';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class App extends Component {
     this.state = {
       userCount: 0,
       id: [],
-      currentUser: { username: 'Ankita' },
+      currentUser: { username: 'Anonymous' },
       messages: [] //messgaes coming from the server will be stored here
     };
   }
