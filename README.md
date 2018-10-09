@@ -8,9 +8,12 @@ The repository contains both the front-end application in Chatty-App/Client and 
 
 Once the dependencies have been installed, start both servers simultaneously.
 
-chatty-app/Client $ npm start // (localhost:3000)
+chatty-app/Client --> $ npm start // (localhost:3000)
 ...
-chatty-app/Server $ nodemon server.js // (localhost:3001)
+
+chatty-app/Server--> $ nodemon server.js // (localhost:3001)
+...
+
 By default, connect to the client in your browser at: http://localhost:3000/
 
 ## Dependencies
