@@ -4,7 +4,6 @@ const uuidv1 = require('uuid/v1');
 const querystring = require('querystring');
 const fetch = require('node-fetch');
 
-// Set the port to 3001
 const PORT = 3001;
 
 // Create a new express server
@@ -31,9 +30,7 @@ const sendUserCountMessage = () => {
   }
   broadcast(userCountMessage)
 }
-// Set up a callback that will run when a client connects to the server
-// When a client connects they are assigned a socket, represented by
-// the ws parameter in the callback.
+
 wss.on('connection', (ws) => {
   console.log('Client connected');
   console.log(wss.clients.size)
@@ -43,7 +40,6 @@ wss.on('connection', (ws) => {
   ws.on('message', (data) => {
     let message = JSON.parse(data);
     message.id = uuidv1();
-    //console.log(`${message.username} with ${message.id} is sending ${message.content}`);
     switch (message.type) {
       case "postMessage":
         message.type = "incomingMessage"
