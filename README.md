@@ -1,49 +1,44 @@
-React Boilerplate
-=====================
+# Chit-Chat (Chatty App)
 
-A minimal and light dev environment for ReactJS.
+A minimal and light chat environment using React.
 
-### Usage
+### Server and Client Files
 
-Clone the boilerplate and create your own git repo.
+The repository contains both the front-end application in Chatty-App/Client and the server in Chatty-App/Server. After cloning the repository, ensure that you install dependencies for both:
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+Once the dependencies have been installed, start both servers simultaneously.
 
-Install the dependencies and start the server.
+chatty-app/Client $ npm start // (localhost:3000)
+...
+chatty-app/Server $ nodemon server.js // (localhost:3001)
+By default, connect to the client in your browser at: http://localhost:3000/
 
-```
-npm install
-npm start
-open http://localhost:3000
-```
+## Dependencies
 
-### Static Files
+Front-end:
 
-You can store static files like images, fonts, etc in the `build` folder.
+React
+ReactDOM
+Back-end:
 
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
+Express
+ws
+uuid
+Dev:
 
-### Linting
+babel-core
+babel-loader
+babel-preset-es2015
+babel-preset-react
+css-loader
+node-sass
+sass-loader
+sockjs-client
+style-loader
+webpack
+webpack-dev-server
 
-This boilerplate project includes React ESLint configuration.
+## ScreenShot
 
-```
-npm run lint
-```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
-
-### ScreenShot
 ![ScreenShot](https://raw.githubusercontent.com/Ankitaahuja/Chatty-App/master/Images/Chatty1.png)
 ![ScreenShot](https://raw.githubusercontent.com/Ankitaahuja/Chatty-App/master/Images/chatty2.png)
