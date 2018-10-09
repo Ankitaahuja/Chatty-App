@@ -45,5 +45,5 @@ npm run lint
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
 
 ### ScreenShot
-![ScreenShot](https://raw.githubusercontent.com/Ankitaahuja/Chatty-App/Images/Chatty1.png)
-![ScreenShot](https://raw.githubusercontent.com/Ankitaahuja/Chatty-App/Images/chatty2.png)
+![ScreenShot](https://raw.githubusercontent.com/Ankitaahuja/Chatty-App/master/Images/Chatty1.png)
+![ScreenShot](https://raw.githubusercontent.com/Ankitaahuja/Chatty-App/master/Images/chatty2.png)
